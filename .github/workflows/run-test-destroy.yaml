@@ -38,7 +38,7 @@ jobs:
           echo " Creating resources "
           python3 resources/main.py
 
-     - name: Run tests
+      - name: Run tests
         run: |
           echo " Checking if resources exists "
           python3 tests/tests.py
