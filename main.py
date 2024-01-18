@@ -6,7 +6,6 @@ from botocore.exceptions import ClientError
 from datetime import datetime
 import os
 
-
 dt = datetime.now()
 formatted_date = dt.strftime("%Y%m%d%H%M%S")
 timestamp = formatted_date[0:8]
@@ -43,7 +42,6 @@ def create_s3_bucket():
         )
         raise error
 
-
 def create_service_account():
     # get_user is not included in aws_session.resource
     iam_client = boto3.client('iam')
@@ -63,7 +61,6 @@ def create_service_account():
 
 new_user_info = create_service_account()
 user_policy_arn = f"{new_user_info['UserArn']}"
-
 
 def create_s3_read_policy():
 
@@ -130,7 +127,6 @@ def attach_policy(arn, user):
     except ClientError:
         logger.exception("Couldn't attach policy %s to user %s.", policy_Arn, user)
         raise
-
 
 create_s3_bucket()
 create_s3_read_policy()
