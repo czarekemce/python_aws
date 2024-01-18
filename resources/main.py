@@ -63,6 +63,8 @@ new_user_info = create_service_account()
 user_policy_arn = f"{new_user_info['UserArn']}"
 
 def create_s3_read_policy():
+    
+    iam_client = aws_session.resource("iam")
 
     path='/'
     description='BOTO3 role'
