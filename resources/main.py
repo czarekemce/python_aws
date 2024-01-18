@@ -64,7 +64,7 @@ user_policy_arn = f"{new_user_info['UserArn']}"
 
 def create_s3_read_policy():
 
-    iam_client = aws_session.resource("iam")
+    iam_client = boto3.client('iam')
 
     path='/'
     description='BOTO3 role'
