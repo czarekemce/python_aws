@@ -43,6 +43,12 @@ jobs:
           echo " Checking if resources exists "
           python3 tests/tests.py
 
+  post-actions:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
       - name: Run remove.py
         run: |
           echo " Removing resources "
