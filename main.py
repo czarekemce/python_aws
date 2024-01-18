@@ -64,9 +64,6 @@ def create_service_account():
 new_user_info = create_service_account()
 user_policy_arn = f"{new_user_info['UserArn']}"
 
-print(f"Username: {new_user_info['UserName']}")
-print(f"User ARN: {new_user_info['UserArn']}")
-
 
 def create_s3_read_policy():
 
@@ -124,6 +121,8 @@ def attach_policy(arn, user):
     iam_client = boto3.client('iam')
     policy_Arn=f"arn:aws:iam::{arn}:policy/{policy_name}"
 
+    with open('policy_arn_name.txt', 'w') as file:
+        file.write(policy_Arn)
 
     try:
         iam_client.attach_user_policy(UserName=user, PolicyArn=policy_Arn)
