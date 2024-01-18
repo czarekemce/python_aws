@@ -1,0 +1,49 @@
+name: Create resources, test if exists, delete.
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write"
+    steps:
+      - name: Configure AWS Credentials Action For GitHub Actions
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY_ID }}
+          aws-region: eu-central-1
+
+      - name: Checkout the repo
+        uses: actions/checkout@v3
+
+      - name: Install Python and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install -r requirements.txt
+
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Run main.py
+        run: |
+          echo " Creating resources "
+          python3 resources/main.py
+
+     - name: Run tests
+        run: |
+          echo " Checking if resources exists "
+          python3 tests/tests.py
+
+      - name: Run remove.py
+        run: |
+          echo " Removing resources "
+          python3 resources/remove.py
