@@ -7,7 +7,7 @@ dt = datetime.now()
 formatted_date = dt.strftime("%Y%m%d%H%M%S")
 timestamp = formatted_date[0:8]
 
-file_path = '../resources/policy_arn_name.txt'
+file_path = '/home/runner/work/python_aws/python_aws/resources/policy_arn_name.txt'
 with open(file_path, 'r') as file:
     read = file.readlines()
     arn_name = read[0].strip()
