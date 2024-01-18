@@ -8,7 +8,6 @@ dt = datetime.now()
 formatted_date = dt.strftime("%Y%m%d%H%M%S")
 timestamp = formatted_date[0:8]
 
-
 logger = logging.getLogger(__name__)
 user_name = "new-test-python-user"
 bucket_name = (f"new-test-bucket{timestamp}")
@@ -37,8 +36,6 @@ iam_client = aws_session.resource("iam")
 def detach_from_user():
 
     iam_client = boto3.client('iam')
-
-        
 
     try:
         iam_client.detach_user_policy(
